@@ -10,3 +10,6 @@ Repo contains custom Docker to replace Docker from https://hub.docker.com/r/argo
 New Docker Repository location is https://hub.docker.com/r/realestatepilot/argocd-customtooling.
 
 
+## Thank you ArgoProj!
+
+This docker is based on the fantastic work by [ArgoProj](https://argoproj.github.io/).
