@@ -37,9 +37,9 @@ jobs:
             git config --global user.name 'githubaction'
             git config --global user.email 'tgruenert@users.noreply.github.com'
             git add version.txt
-            git commit -am "automated bump version to ${{steps.esversion.outputs.release}}"
-            SHORTVERSION=$(echo ${{steps.version.outputs.release}} | cut -c 2-)
-            git tag -a -m "automated version bump" $SHORTVERSION
+            git commit -am "automated bump version to ${{steps.version.outputs.release}}"
+            # SHORTVERSION=$(echo ${{steps.version.outputs.release}} | cut -c 2-)
+            git tag -a -m "automated version bump" ${{steps.version.outputs.release}}
             git push origin --atomic --follow-tags
             echo "new version pushed"
           fi
