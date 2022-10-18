@@ -1,0 +1,46 @@
+name: Check for new version of ArgoCD
+on: 
+  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # check sometimes
+    - cron:  '35 4/4 * * *'
+
+    
+jobs:
+  check:
+    name: check current version
+    runs-on: ubuntu-latest
+    steps:
+      - id: version
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          owner: argoproj
+          repo: argo-cd
+          excludes: draft
+
+      - name: printoutput
+        run: |
+          echo ${{ steps.version.outputs.release }}
+
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        with:
+          # use deploy key to trigger further actions (push on tag)
+          ssh-key: "${{ secrets.COMMIT_KEY }}"
+      - id: setversion
+        run: |
+          echo ${{ steps.version.outputs.release }} > version.txt
+          cat version.txt  
+          # echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+          if [[ $([ -z "`git status --porcelain`" ] && echo "false" || echo "true") == "true" ]]; then
+            git config --global user.name 'githubaction'
+            git config --global user.email 'tgruenert@users.noreply.github.com'
+            git add version.txt
+            git commit -am "automated bump version to ${{steps.esversion.outputs.release}}"
+            SHORTVERSION=$(echo ${{steps.version.outputs.release}} | cut -c 2-)
+            git tag -a -m "automated version bump" $SHORTVERSION
+            git push origin --atomic --follow-tags
+            echo "new version pushed"
+          fi
+          exit 0
