@@ -36,5 +36,9 @@ RUN curl -o /usr/local/bin/sops -L https://github.com/mozilla/sops/releases/down
 # # Switch back to non-root user
 USER 999
 
+RUN export HELM_CACHE_HOME=/helm-working-dir && \
+    export HELM_CONFIG_HOME=/helm-working-dir && \
+    export HELM_DATA_HOME=/helm-working-dir
+    
 RUN helm plugin install https://github.com/jkroepke/helm-secrets --version $helm_secrets_version
 
