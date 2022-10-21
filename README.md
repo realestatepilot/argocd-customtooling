@@ -1,5 +1,11 @@
 # argocd-customtooling
 
+## Approach
+Using ArgoCD with helm secrets and sops is well documented if you use gpg or age encryption. The downside of this is a difficult key management. If a member of a midsize team leave and decryption should no longer work for this member you have to renew all encrypted files with a new key. Very challenging and often not possible just in time.
+
+This repo offers a solution. Sops can be used also with Vault Transit Encryption Engine. Team Members get a personal account (token) to this engine. Argo Repo Server can use to decrypt sops based files with an other token. Due the seperate authentification if a team member get´s lost, trust is no longer a problem.
+
+## Content
 Repo contains custom Docker to replace Docker from https://hub.docker.com/r/argoproj/argocd.
 
 New Docker Repository location is https://hub.docker.com/r/realestatepilot/argocd-customtooling.
@@ -10,6 +16,8 @@ argocd secrets management is supported with additional tools:
 * vault
 
 Vault Agent uses [AppRole Authentication](https://developer.hashicorp.com/vault/docs/auth/approle) and [Auto-Auth](https://developer.hashicorp.com/vault/docs/agent/autoauth/methods/approle). Vault Token is handled by Vault Agent so that the token is renewed regularly according to the TTL set.
+
+If ArgoProj releases new Versions, Github Action triggers a new build for this Docker also.
 
 ## Usage
 
