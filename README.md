@@ -119,3 +119,9 @@ repoServer:
 ## Thank you community!
 
 This docker is based on the fantastic work by [ArgoProj](https://argoproj.github.io/) and the really useful [helm secrets plugin](https://github.com/jkroepke/helm-secrets).
+
+## Changes
+
+2022-11-03 
+
+* restart vault agent if not running #1
