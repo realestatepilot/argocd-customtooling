@@ -1,4 +1,4 @@
-pid_file = "./pidfile"
+pid_file = "/tmp/vault.pid"
 
 auto_auth {
   method {
@@ -18,7 +18,7 @@ auto_auth {
     type = "file"
 
     config = {
-      path = "/home/argocd/.vault_token"
+      path = "/tmp/.vault_token"
     }
   }
 }
