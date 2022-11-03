@@ -38,16 +38,22 @@ RUN apt-get update && \
         gpg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 RUN curl -o /usr/local/bin/sops -L https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux && \
     chmod +x /usr/local/bin/sops
 
 COPY docker/vault.hcl /etc/vault.d/vault.hcl
+
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh 
 RUN chmod 755 /usr/local/bin/entrypoint.sh 
+
+# use start script for vault which is also check regulary if restart vault agent is needed
+COPY docker/vault-restart.sh /home/argocd/vault-restart.sh
+RUN chmod 777 /home/argocd/vault-restart.sh
 
 # # Switch back to non-root user
 USER 999
 RUN helm plugin install https://github.com/jkroepke/helm-secrets --version $HELM_SECRETS_VERSION
 
-# install vault agent config and startup rotine for them
+# install vault agent config and startup routine for them
 COPY docker/.bashrc /home/argocd/.bashrc
