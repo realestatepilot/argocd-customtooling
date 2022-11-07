@@ -15,7 +15,8 @@ ENV HELM_SECRETS_HELM_PATH=/usr/local/bin/helm \
     HELM_PLUGINS="/home/argocd/.local/share/helm/plugins/" \
     HELM_SECRETS_VALUES_ALLOW_SYMLINKS=false \
     HELM_SECRETS_VALUES_ALLOW_ABSOLUTE_PATH=false \
-    HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL=false
+    HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL=false \
+    HELM_SECRETS_SOPS_PATH=/usr/local/bin/sops-wrapper.sh
 
 # Switch to root for the ability to perform install
 USER root
@@ -50,6 +51,10 @@ RUN chmod 755 /usr/local/bin/entrypoint.sh
 # use start script for vault which is also check regulary if restart vault agent is needed
 COPY docker/vault-restart.sh /home/argocd/vault-restart.sh
 RUN chmod 777 /home/argocd/vault-restart.sh
+
+# wrapper to inject vault token in environemt before running sops
+COPY docker/sops-wrapper.sh /usr/local/bin/sops-wrapper.sh 
+RUN chmod 777 /usr/local/bin/sops-wrapper.sh 
 
 # # Switch back to non-root user
 USER 999
