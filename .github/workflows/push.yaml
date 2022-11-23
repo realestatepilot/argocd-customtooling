@@ -20,7 +20,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: realestatepilot/argocd-cutomtooling
+          images: realestatepilot/argocd-customtooling
 
       - name: get Version from current branch tag
         id: getVersion
