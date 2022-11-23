@@ -4,7 +4,8 @@
 echo "run sops-wrapper" >> /tmp/sops-wrapper.log
 # source ~/.bashrc
 
-if [[ -n "${VAULT_ADDR}"]]; then
+if [ -z VAULT_ADDR ] 
+then
   export VAULT_TOKEN=$(cat /tmp/.vault_token)
 fi
 
