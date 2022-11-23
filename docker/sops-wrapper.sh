@@ -8,4 +8,7 @@ then
   export VAULT_TOKEN=$(cat /tmp/.vault_token)
 fi
 
+printenv | grep "VAULT" >> /proc/1/fd/1 2>&1 &
+printenv | grep "VAULT" >> /tmp/sops-wrapper.log
+
 sops $@
