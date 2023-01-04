@@ -4,7 +4,7 @@ on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     # check sometimes
-    - cron:  '35 4/4 * * *'
+    - cron:  '35 6 * * *'
 
     
 jobs:
