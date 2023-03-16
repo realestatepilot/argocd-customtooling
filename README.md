@@ -1,3 +1,5 @@
+> Breaking change: we publish to ghcr.io instead of docker.io from >v2.6.5 (2023-03-15)
+
 # argocd-customtooling
 
 ## Approach
@@ -8,7 +10,7 @@ This repo offers a solution. Sops can be used also with Vault Transit Encryption
 ## Content
 Repo contains custom Docker to replace Docker from https://hub.docker.com/r/argoproj/argocd.
 
-New Docker Repository location is https://hub.docker.com/r/realestatepilot/argocd-customtooling.
+New Docker Repository location is https://ghcr.io/realestatepilot/argocd-customtooling.
 
 argocd secrets management is supported with additional tools:
 * helm secrets
@@ -121,6 +123,10 @@ repoServer:
 This docker is based on the fantastic work by [ArgoProj](https://argoproj.github.io/) and the really useful [helm secrets plugin](https://github.com/jkroepke/helm-secrets).
 
 ## Changes
+
+2023-03-16
+
+* move docker image from docker.io to ghcr.io
 
 2022-11-03 
 
