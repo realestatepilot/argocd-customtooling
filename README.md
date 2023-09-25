@@ -8,7 +8,7 @@ Using ArgoCD with helm secrets and sops is well documented if you use gpg or age
 This repo offers a solution. Sops can be used also with Vault Transit Encryption Engine. Team Members get a personal account (token) to this engine. Argo Repo Server can use to decrypt sops based files with an other token. Due the seperate authentification if a team member get´s lost, trust is no longer a problem.
 
 ## Content
-Repo contains custom Docker to replace Docker from https://hub.docker.com/r/argoproj/argocd.
+Repo contains custom init container to place this in your deployment of https://hub.docker.com/r/argoproj/argocd.
 
 New Docker Repository location is https://ghcr.io/realestatepilot/argocd-customtooling.
 
@@ -88,7 +88,7 @@ server:
 repoServer:
   image:
     repository: docker.io/realestatepilot/argocd-customtooling
-    tag: v2.5.0-rc3-dev2
+    tag: v2.8.4
   env: 
   - name: VAULT_ADDR
     value: https://vault.wolke8.it
@@ -123,6 +123,12 @@ repoServer:
 This docker is based on the fantastic work by [ArgoProj](https://argoproj.github.io/) and the really useful [helm secrets plugin](https://github.com/jkroepke/helm-secrets).
 
 ## Changes
+
+2023-9-25
+
+* argocd registry docker.io/argoproj/argocd has moved to quay.io/argoproj/argocd
+* upgrade sops to 3.8.0
+* upgrade helm secrets to 4.5.1
 
 2023-03-16
 

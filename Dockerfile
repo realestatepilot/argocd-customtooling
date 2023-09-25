@@ -4,11 +4,11 @@
 
 # argocd version is triggered from https://github.com/argoproj/argo-cd/releases
 ARG argocd_version=undef
-FROM argoproj/argocd:$argocd_version
+FROM quay.io/argoproj/argocd:$argocd_version
 
 # this versions are set manually
-ENV SOPS_VERSION=v3.7.3
-ENV HELM_SECRETS_VERSION=v4.1.1
+ENV SOPS_VERSION=v3.8.0
+ENV HELM_SECRETS_VERSION=v4.5.1
 
 # In case wrapper scripts are used, HELM_SECRETS_HELM_PATH needs to be the path of the real helm binary
 ENV HELM_SECRETS_HELM_PATH=/usr/local/bin/helm \
