@@ -1,5 +1,9 @@
 > Breaking change: we publish to ghcr.io instead of docker.io from >v2.6.5 (2023-03-15)
 
+# Inactive
+This project is depracted. The solution from now on is configure an init container for setup helm secrets tooling according to https://argo-cd.readthedocs.io/en/stable/operator-manual/custom_tools/
+Actions are disabled and project is archived.
+
 # argocd-customtooling
 
 ## Approach
